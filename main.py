@@ -30,8 +30,14 @@ class Post(Resource):
                 ai_integer = ai_response.json()['type']
                 if ai_integer == 1:
                     misogony_count = Users.get_misogony_count(user_id)
+                    if(misogony_count is None):
+                        new_user = Users(User_id=user_id, misogony_count = 1)
+                    else:
+                        misogony_count
                 elif ai_integer == 2:
                     hate_speech_count = Users.get_hate_speech_count(user_id)
+                    if (hate_speech_count is None):
+                        new_user = Users(User_id=user_id, hate_speech_count = 1)
 
 
                 return ai_json, 200
